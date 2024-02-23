@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Datasheet from './components/Datasheet';
+import Home from './components/Home';
+import Pokedex from './components/Pokedex';
+import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Favoritos from './components/Favoritos';
+
+const router = createBrowserRouter([
+  {
+    path:'/',
+    children: [
+      {
+        index: true,
+        element: <Home/>
+      },
+      {
+        path: '/pokedex',
+        element: <Pokedex/>
+      },
+      {
+        path: '/pokemon/:id',
+        element: <Datasheet/>
+      },
+      {
+        path: '/favoritos',
+        element: <Favoritos/>
+      }
+    ]
+  }
+])
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router}/>
   );
 }
 
